@@ -4,6 +4,7 @@ import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
 
 const NewsCard = ({ news }) => {
+    const {_id}= news
     return (
         <div className='border mb-8 rounded-t-md'>
             <div className="bg-[#F3F3F3] p-5 flex items-center justify-between">
@@ -25,7 +26,7 @@ const NewsCard = ({ news }) => {
                 <p className='mb-5'>{news.title}</p>
                 <img src={news.image_url} alt="" />
                 {
-                    news.details.length > 200 ? <p>{news.details.slice(0, 200)} <Link className='text-[#FF8C47]' to="/readMore">Read More</Link></p> : <p>{news.details}</p>
+                    news.details.length > 200 ? <p>{news.details.slice(0, 200)} <Link to={`/news/${_id}`} className='text-[#FF8C47]'>Read More</Link></p> : <p>{news.details}</p>
                 }
             </div>
             <div>

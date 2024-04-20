@@ -9,15 +9,19 @@ const auth = getAuth(app);
 
 const Providers = ({children}) => {
     const [user, setUser]= useState(null)
+    const[loading, setLoading]= useState(true)
 
     const createUser= (email, password)=>{
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const login= (email, password)=>{
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
     const logout= ()=>{
+        setLoading(true)
         return signOut(auth)
     }
 
@@ -25,6 +29,7 @@ const Providers = ({children}) => {
         const unSubscribe= onAuthStateChanged(auth, currentUser=>{
             console.log("The available user is: ",currentUser)
             setUser(currentUser)
+            setLoading(false)
         })
         return ()=>{
             unSubscribe()
@@ -32,6 +37,7 @@ const Providers = ({children}) => {
     }, [])
     const authInfo= {
         user,
+        loading,
         login,
         logout,
         createUser
